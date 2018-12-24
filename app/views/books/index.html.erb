@@ -1,0 +1,7 @@
+<%= link_to 'New Book', new_book_path %>
+
+<% @books.each do |book| %>
+  <%= render partial: 'books/book', locals: {book: book} %>
+<% end %>
+
+

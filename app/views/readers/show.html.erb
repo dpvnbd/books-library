@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @reader.first_name %>
+</p>
+
+<p>
+  <strong>Second name:</strong>
+  <%= @reader.second_name %>
+</p>
+
+<p>
+  <strong>Patronymic:</strong>
+  <%= @reader.patronymic %>
+</p>
+
+<p>
+  <strong>Born on:</strong>
+  <%= @reader.born_on %>
+</p>
+
+<p>
+  <strong>Home address:</strong>
+  <%= @reader.home_address %>
+</p>
+
+<p>
+  <strong>Work address:</strong>
+  <%= @reader.work_address %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @reader.phone %>
+</p>
+
+<p>
+  <strong>Passport:</strong>
+  <%= @reader.passport %>
+</p>
+
+<%= link_to 'Edit', edit_reader_path(@reader) %> |
+<%= link_to 'Back', readers_path %>

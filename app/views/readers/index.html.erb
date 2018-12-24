@@ -1,0 +1,6 @@
+<%= link_to 'New Reader', new_reader_path %>
+
+<% @readers.each do |reader| %>
+  <%= render partial: 'reader', locals: {reader: reader} %>
+<% end %>
+

@@ -1,0 +1,35 @@
+@import "bootstrap";
+@import "books";
+@import "readers";
+@import "categories";
+@import "mixins";
+@import "font-awesome";
+
+.page-content{
+  @include flex(column, space-around, center);
+  margin-top: 10px;
+}
+
+.record-info {
+  @include flex(column, flex-start, left);
+
+  .record-info-row {
+    @include flex(row, flex-start, baseline);
+
+    .record-title {
+      font-size: 24px;
+    }
+
+    .record-subtext {
+      font-size: 20px;
+      color: grey;
+      margin-left: 5px;
+    }
+
+    .record-links {
+      font-size: 20px;
+      margin-left: auto;
+    }
+  }
+
+}

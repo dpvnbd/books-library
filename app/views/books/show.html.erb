@@ -1,0 +1,39 @@
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @book.author %>
+</p>
+
+<p>
+  <strong>Published on:</strong>
+  <%= @book.published_on %>
+</p>
+
+<p>
+  <strong>Publisher:</strong>
+  <%= @book.publisher %>
+</p>
+
+<p>
+  <strong>Decommissioned at:</strong>
+  <%= @book.decommissioned_at %>
+</p>
+
+<p>
+  <strong>Decommissioned reason:</strong>
+  <%= @book.decommissioned_reason %>
+</p>
+
+<p>
+  <strong>Number of pages:</strong>
+  <%= @book.number_of_pages %>
+</p>
+
+<div class="d-flex flex-column">
+  <%= link_to 'Edit', edit_book_path(@book) %>
+  <%= link_to 'Back', books_path %>
+</div>
