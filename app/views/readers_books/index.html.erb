@@ -1,0 +1,35 @@
+<%= link_to 'New Readers Book', new_readers_book_path %>
+
+<table class = 'table'>
+  <thead>
+    <tr>
+      <th>Book</th>
+      <th>Reader</th>
+      <th>Checked out at</th>
+      <th>Due to return at</th>
+      <th>Returned at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @readers_books.each do |readers_book| %>
+      <tr>
+        <td><%= link_to readers_book.book.title, readers_book.book %></td>
+        <td><%= link_to readers_book.reader.full_name, readers_book.reader %></td>
+        <td><%= readers_book.checked_out_at %></td>
+        <td><%= readers_book.due_to_return_at %></td>
+        <td><%= readers_book.returned_at %></td>
+        <td><%= link_to readers_book do %>
+            <%= fa_icon "eye" %>
+          <% end %></td>
+        <td><%= link_to edit_readers_book_path(readers_book) do %>
+            <%= fa_icon "edit" %>        
+            <% end %></td>
+        <td><%= link_to  readers_book, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= fa_icon "trash" %>        
+        <% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

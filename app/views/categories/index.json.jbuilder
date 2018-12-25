@@ -1,1 +1,1 @@
-json.array! @categories, partial: 'categories/category', as: :category
+json.array! @readers_books, partial: 'categories/category', as: :category

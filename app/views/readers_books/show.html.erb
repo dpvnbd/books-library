@@ -1,0 +1,29 @@
+<p>
+  <strong>Book:</strong>
+  <%= render partial: 'books/book', locals: {book: @readers_book.book} %>
+</p>
+
+<p>
+  <strong>Reader:</strong>
+  <%= render partial: 'readers/reader', locals: {reader: @readers_book.reader} %>
+</p>
+
+<p>
+  <strong>Checked out at:</strong>
+  <%= @readers_book.checked_out_at %>
+</p>
+
+<p>
+  <strong>Due to return at:</strong>
+  <%= @readers_book.due_to_return_at %>
+</p>
+
+<p>
+  <strong>Returned at:</strong>
+  <%= @readers_book.returned_at %>
+</p>
+
+<div class="d-flex flex-column">
+  <%= link_to 'Edit', edit_readers_book_path(@readers_book) %>
+  <%= link_to 'Back', readers_books_path %>
+</div>

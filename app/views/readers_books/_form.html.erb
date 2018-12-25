@@ -1,0 +1,42 @@
+<%= form_with(model: readers_book, local: true) do |form| %>
+  <% if readers_book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(readers_book.errors.count, "error") %> prohibited this readers_book from being saved:</h2>
+
+      <ul>
+      <% readers_book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :book %>
+    <%= form.select("book_id", Book.all.collect {|p| [ p.title, p.id ] }, {}, {class:"form-control"}) %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :reader %>
+    <%= form.select("reader_id", Reader.all.collect {|p| [ p.full_name, p.id ] }, {}, {class:"form-control"}) %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :checked_out_at %>
+    <%= form.datetime_select :checked_out_at, class:"form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :due_to_return_at %>
+    <%= form.datetime_select :due_to_return_at, class:"form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :returned_at %>
+    <%= form.datetime_select :returned_at, {:include_blank => true, :default => nil, class: 'form-control'} %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-primary" %>
+  </div>
+<% end %>
