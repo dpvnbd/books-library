@@ -1,0 +1,52 @@
+<form method="get">
+  <% fields.each do |field| %>
+    <div class="form-group">
+      <%= form.label field.name %>
+      <% if field.type == 'text' || !field.type %>
+        <%= form.text_field field.name, class: 'form-control' %>
+      <% elsif field.type == 'date' %>
+        <%= form.date_select field.name, { :include_blank => true, :default => nil } %>
+      <% elsif field.type == 'datetime' %>
+        <%= form.datetime_select field.name, { :include_blank => true, :default => nil } %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :author %>
+      <%= form.text_field :author, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :published_on %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :publisher %>
+      <%= form.text_field :publisher, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :decommissioned_at %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :decommissioned_reason %>
+      <%= form.text_area :decommissioned_reason, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :number_of_pages %>
+      <%= form.number_field :number_of_pages, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :categories %>
+      <%= form.collection_select :category_ids, Category.all, :id, :name, { :selected => book.categories.pluck(:id) }, { :multiple => true, class: 'form-control' } -%>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Search', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+</form>
