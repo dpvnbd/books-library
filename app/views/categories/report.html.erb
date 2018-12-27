@@ -1,0 +1,30 @@
+<div>
+  <span> Report from <%= @from %> to <%= @to %></span>
+</div>
+<table class = 'table'>
+  <thead>
+  <tr>
+    <th>Category</th>
+    <th>Received</th>
+    <th>Decommissioned</th>
+    <th>Checked out</th>
+    <th>Returned</th>
+    <th>Returned late</th>
+    <th>Not returned</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @report.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td><%= category.books_received %></td>
+      <td><%= category.books_decommissioned %></td>
+      <td><%= category.books_checked_out %></td>
+      <td><%= category.books_returned %></td>
+      <td><%= category.books_returned_late %></td>
+      <td><%= category.books_not_returned %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

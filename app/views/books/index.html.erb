@@ -1,7 +1,17 @@
 <%= link_to 'New Book', new_book_path %>
 
-<% @books.each do |book| %>
-  <%= render partial: 'books/book', locals: {book: book} %>
-<% end %>
-
-
+<% filter_fields = [{name: :title}, {name: :author},
+                    {name: :publisher},
+                    {name: :published_on_from, type: :date},
+                    {name: :published_on_to, type: :date},
+                    {name: :category_id, type: :category}] %>
+<div class="d-flex">
+  <div class="mr-3 mb-3">
+    <%= render partial: 'shared/filters', locals: {fields: filter_fields} %>
+  </div>
+  <div>
+    <% @books.each do |book| %>
+      <%= render partial: 'books/book', locals: {book: book} %>
+    <% end %>
+  </div>
+</div>

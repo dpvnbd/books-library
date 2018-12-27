@@ -1,10 +1,11 @@
 class ReadersController < ApplicationController
   before_action :set_reader, only: [:show, :edit, :update, :destroy]
+  before_action :save_filters, only: :index
 
   # GET /readers
   # GET /readers.json
   def index
-    @readers = Reader.all
+    @readers = TextFilter.new(Reader.all, filter_params).call
   end
 
   # GET /readers/1
@@ -28,11 +29,11 @@ class ReadersController < ApplicationController
 
     respond_to do |format|
       if @reader.save
-        format.html { redirect_to @reader, notice: 'Reader was successfully created.' }
-        format.json { render :show, status: :created, location: @reader }
+        format.html {redirect_to @reader, notice: 'Reader was successfully created.'}
+        format.json {render :show, status: :created, location: @reader}
       else
-        format.html { render :new }
-        format.json { render json: @reader.errors, status: :unprocessable_entity }
+        format.html {render :new}
+        format.json {render json: @reader.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -42,11 +43,11 @@ class ReadersController < ApplicationController
   def update
     respond_to do |format|
       if @reader.update(reader_params)
-        format.html { redirect_to @reader, notice: 'Reader was successfully updated.' }
-        format.json { render :show, status: :ok, location: @reader }
+        format.html {redirect_to @reader, notice: 'Reader was successfully updated.'}
+        format.json {render :show, status: :ok, location: @reader}
       else
-        format.html { render :edit }
-        format.json { render json: @reader.errors, status: :unprocessable_entity }
+        format.html {render :edit}
+        format.json {render json: @reader.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -56,19 +57,29 @@ class ReadersController < ApplicationController
   def destroy
     @reader.destroy
     respond_to do |format|
-      format.html { redirect_to readers_url, notice: 'Reader was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html {redirect_to readers_url, notice: 'Reader was successfully destroyed.'}
+      format.json {head :no_content}
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reader
-      @reader = Reader.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def reader_params
-      params.require(:reader).permit(:first_name, :second_name, :patronymic, :born_on, :home_address, :work_address, :phone, :passport)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_reader
+    @reader = Reader.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def reader_params
+    params.require(:reader).permit(:first_name, :second_name, :patronymic, :born_on, :home_address, :work_address, :phone, :passport)
+  end
+
+  def filter_params
+    filters = params.permit(filters: %i[first_name second_name patronymic home_address work_address passport])
+    filters[:filters]
+  end
+
+  def save_filters
+    @filters = OpenStruct.new(filter_params)
+  end
 end

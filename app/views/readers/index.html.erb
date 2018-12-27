@@ -1,6 +1,16 @@
 <%= link_to 'New Reader', new_reader_path %>
 
-<% @readers.each do |reader| %>
-  <%= render partial: 'reader', locals: {reader: reader} %>
-<% end %>
-
+<% filter_fields = [{name: :first_name}, {name: :second_name},
+                    {name: :patronymic},{name: :home_address},
+                    {name: :work_address}, {name: :passport},
+                    {name: :born_on, type: :date}] %>
+<div class="d-flex">
+  <div class="mr-3 mb-3">
+    <%= render partial: 'shared/filters', locals: {fields: filter_fields} %>
+  </div>
+  <div>
+    <% @readers.each do |reader| %>
+      <%= render partial: 'reader', locals: {reader: reader} %>
+    <% end %>
+  </div>
+</div>

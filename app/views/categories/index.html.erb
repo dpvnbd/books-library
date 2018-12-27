@@ -1,15 +1,37 @@
 <%= link_to 'New Category', new_category_path %>
 
-<% @categories.each do |category| %>
-  <div class="d-flex">
-    <h3>
-      <%= category.name %>
-      <%= link_to edit_category_path(category) do %>
-        <%= fa_icon "edit" %>
-      <% end %>
-      <%= link_to category, method: :delete, data: {confirm: 'Are you sure?'} do %>
-        <%= fa_icon "trash" %>
-      <% end %>
-    </h3>
+<div class="d-flex">
+  <div class="mr-3 mb-3">
+    <%= form_for :report, url: 'categories/report', method: "get" do |form| %>
+      <div class="form-group">
+        <%= form.label :from %>
+        <%= form.date_field :from, value: Date.current - 1.week, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :to %>
+        <%= form.date_field :to, value: Date.current, class: 'form-control' %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit 'Get report', class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+  <div>
+    <% @categories.each do |category| %>
+      <div class="d-flex">
+        <h3>
+          <%= category.name %>
+          <%= link_to edit_category_path(category) do %>
+            <%= fa_icon "edit" %>
+          <% end %>
+          <%= link_to category, method: :delete, data: {confirm: 'Are you sure?'} do %>
+            <%= fa_icon "trash" %>
+          <% end %>
+        </h3>
+      </div>
+    <% end %>
+  </div>
+</div>
+
